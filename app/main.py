@@ -4,19 +4,20 @@ app = Flask(__name__)
 
 @app.route('/get', methods=['GET'])
 def get():
-	hname = str(hash(request.environ['QUERY_STRING']))
-	print(hname)
+	string = request.environ['QUERY_STRING']
+	hname = str(hash(string))
 	if not(exists(hname)):
 		with open(hname, 'w') as wf:
 			wf.write('0')
 	with open(hname) as rf:
-		return rf.read().strip()
+		num = rf.read().strip()
+		return 'document.getElementById("{}").innerText = {}'.format(string, num)
 	return 'error'
 
 @app.route('/add', methods=['GET'])
 def add():
-	hname = str(hash(request.environ['QUERY_STRING']))
-	print(hname)
+	string = request.environ['QUERY_STRING']
+	hname = str(hash(string))
 	if not(exists(hname)):
 		with open(hname, 'w') as wf:
 			wf.write('0')
