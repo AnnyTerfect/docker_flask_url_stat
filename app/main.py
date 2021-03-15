@@ -25,7 +25,7 @@ def add():
 		num = int(rf.read().strip())
 		with open(hname, 'w') as wf:
 			wf.write(str(num + 1))
-			return 'successful'
+			return 'console.log("successful")'
 	return 'error'
 
 if __name__ == "__main__":
